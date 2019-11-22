@@ -6,6 +6,24 @@ const genres = require('./routes/genres'); //ROUTING STEP 1: GET THE FILE
 const users = require('./routes/users'); //ROUTING STEP 1: GET THE FILE
 const auth = require('./routes/auth'); //ROUTING STEP 1: GET THE FILE
 const mongoose = require('mongoose');
+const config = require('config');
+
+// console.log('Node_ENV::' + config.util.getEnv('Node_ENV'));
+// console.log('jwtPrivatekey::' + config.util.getEnv('jwtPrivatekey'));
+// console.log(
+// 	'movieApp_jwtPrivatekey' + config.util.getEnv('movieApp_jwtPrivatekey')
+// );
+// if (!config.get('jwtPrivateKey')) {
+// 	console.log('::FATAL ERROR:: JWT Private Key not found');
+// 	process.exit(1); //1 indicates failure (0 is success)
+// }
+
+console.log(process.env.movieApp_jwtPrivatekey); //this works, CONFIG MODULE DID NOT WORK
+
+if (!process.env.movieApp_jwtPrivatekey) {
+	console.log('::FATAL ERROR:: JWT Private Key not found');
+	process.exit(1); //1 indicates failure (0 is success)
+}
 
 const app = express();
 

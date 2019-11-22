@@ -4,6 +4,9 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
+//::SIDE NOTE::mapping conventionin config files IN CONFIG FOLDER
+//Setting_Name:Env_Variable_Name  ::Actual value of private key stored in env_var, not in code::
+const config = require('config'); //using config module
 
 const router = express.Router();
 
@@ -38,7 +41,12 @@ router.post('/', (req, res) => {
 			console.log(user._id);
 			//Step 5:create a JSON Web Token (JWT) for user,
 			//first arg = payload and the 2nd argument is the private key(a string that should be stored as an environment variable)
-			const token = jwt.sign({ _id: user._id }, 'JWTPrivateKey'); //dont do this, store key in env var instead and then use that here
+			const token = jwt.sign(
+				{ _id: user._id },
+				process.env.movieApp_jwtPrivatekey //this works, set directly to process env
+			);
+			//::FAILED TO ADD ENV KEY USING CONFIG MODULE::ASK FOR HELP
+			//const token = jwt.sign({ _id: user._id }, config.get('jwtPrivateKey'));
 			//const decoded = jwt.verify(token, 'JWTPrivateKey'); //This works, gets correct id
 			//console.log('VerifiedID::', decoded._id);
 			return res.send(token); //should return JSON Web token
