@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt');
 const lodash = require('lodash');
 const router = express.Router();
 
+//TO CREATE A NEW USER//
+
 //start using await async, code becomes much simpler
 router.post('/', (req, res) => {
 	//Step 1: validae the user input and if there is an error, send 400 res and error message
