@@ -10,6 +10,8 @@ const config = require('config'); //using config module
 
 const router = express.Router();
 
+//TO AUTHENTICATE EXISTING USER (LOGIN)//
+
 //start using await async, code becomes much simpler
 router.post('/', (req, res) => {
 	//Step 1: validae the user input for authentication
